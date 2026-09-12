@@ -10,3 +10,4 @@ models/*.pkl
 reports/*.png
 reports/*.json
 .DS_Store
+.idea/
