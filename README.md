@@ -1,73 +1,96 @@
-# SmartBank Guard 🏦
+# SmartBank Guard 🏦🛡️
 
-AI-powered transaction fraud detection and risk scoring system built with Python and machine learning.
+### AI-Powered Transaction Fraud Detection & Risk Scoring System
 
-## Why this project?
-Financial institutions need systems that can identify suspicious transactions while keeping false alarms manageable. SmartBank Guard demonstrates an end-to-end ML workflow: data loading, preprocessing, class-imbalance handling, model comparison, evaluation, model persistence, and an interactive Streamlit dashboard.
+SmartBank Guard is an end-to-end machine learning project that detects potentially fraudulent credit-card transactions and provides transaction-level risk assessment through an interactive Streamlit dashboard.
 
-> This is an educational project using a public credit-card fraud dataset. It is not an HSBC project and does not use HSBC customer data.
+The project compares multiple machine learning algorithms, evaluates them using fraud-focused metrics, performs decision-threshold analysis, and provides model explainability through feature importance.
 
-## Features
-- Exploratory data analysis
-- Stratified train/test split
-- Feature scaling
-- Logistic Regression baseline
-- Random Forest model
-- XGBoost model
-- Precision, Recall, F1 and ROC-AUC evaluation
-- Confusion matrix and ROC curve
-- Saved production model
-- Transaction-level risk scoring
-- Streamlit dashboard
+> ⚠️ **Educational Project:** SmartBank Guard uses a public anonymized credit-card fraud dataset. It is not affiliated with HSBC and does not use HSBC customer data.
 
-## Project structure
+---
+
+## 🚀 Project Highlights
+
+- 🤖 Machine learning based fraud detection
+- 📊 Comparison of Logistic Regression, Random Forest and XGBoost
+- ⚖️ Handling of highly imbalanced fraud data
+- 🎯 Precision, Recall, F1-score and ROC-AUC evaluation
+- 📈 Confusion Matrix and ROC Curve
+- 🔍 Decision-threshold analysis
+- 🧠 Feature importance and model explainability
+- 💳 Transaction-level fraud risk scoring
+- 🌐 Interactive Streamlit dashboard
+- 💾 Saved trained model and analysis reports
+
+---
+
+## 🧠 Problem Statement
+
+Credit-card fraud detection is a challenging classification problem because fraudulent transactions represent only a very small proportion of all transactions.
+
+A model with high accuracy can still perform poorly at detecting fraud.
+
+Therefore, SmartBank Guard focuses on metrics such as:
+
+- Precision
+- Recall
+- F1-score
+- ROC-AUC
+
+The project also analyzes different probability thresholds to identify an operating point that provides a useful balance between detecting fraud and avoiding unnecessary false alerts.
+
+---
+
+## 🏗️ System Architecture
+
 ```text
-SmartBank-Guard/
-├── data/                  # Dataset is downloaded/generated locally; not committed
-├── models/                # Trained model is saved here
-├── notebooks/
-│   └── fraud_detection.ipynb
-├── reports/               # Evaluation outputs
-├── src/
-│   ├── data_loader.py
-│   ├── preprocessing.py
-│   └── train.py
-├── app.py
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
-
-## Dataset
-The training script uses the public `creditcard` dataset through OpenML. The target column is `Class` where 1 represents fraud and 0 represents a legitimate transaction.
-
-The dataset is highly imbalanced, so accuracy alone is not an appropriate primary metric.
-
-## Run locally
-```bash
-pip install -r requirements.txt
-python src/train.py
-streamlit run app.py
-```
-
-The first training run may take some time because the dataset is downloaded and the models are trained.
-
-## Model selection
-The training script compares Logistic Regression, Random Forest and XGBoost. The final model is selected using ROC-AUC on the held-out test set, while Precision, Recall and F1 are also reported because fraud detection is a rare-event classification problem.
-
-## Interview talking points
-1. Why is accuracy misleading for fraud detection?
-2. Why use stratification during train/test split?
-3. What is class imbalance?
-4. Why compare a linear baseline with tree-based models?
-5. What does precision vs recall mean in fraud detection?
-6. How would you reduce false positives in a real banking system?
-7. How would you monitor model drift after deployment?
-8. Why should preprocessing be fitted only on training data?
-9. How would you protect transaction data in production?
-10. How could this system be deployed as an API/microservice?
-
-## Limitations
-- Public/anonymized data is used.
-- The project is a prototype, not a production banking fraud engine.
-- Real banking systems would require stronger security, explainability, latency, monitoring, governance and human-review workflows.
+                    ┌─────────────────────┐
+                    │   Credit Card Data  │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Data Loading & EDA  │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │   Preprocessing     │
+                    │ Scaling & Splitting │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+              ┌────────────────────────────────┐
+              │       Model Training            │
+              │                                │
+              │ Logistic Regression            │
+              │ Random Forest                   │
+              │ XGBoost                        │
+              └───────────────┬────────────────┘
+                              │
+                              ▼
+                    ┌─────────────────────┐
+                    │ Model Evaluation    │
+                    │                     │
+                    │ Precision           │
+                    │ Recall              │
+                    │ F1-score            │
+                    │ ROC-AUC             │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Threshold Analysis  │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ XGBoost Model       │
+                    │ Risk Prediction     │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Streamlit Dashboard │
+                    └─────────────────────┘
